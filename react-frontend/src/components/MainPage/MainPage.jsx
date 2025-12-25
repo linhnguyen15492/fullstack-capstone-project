@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
-import { urlConfig } from "../config";
+import { useNavigate } from "react-router-dom";
+import { urlConfig } from "../../config";
 
 const MainPage = () => {
   const [gifts, setGifts] = useState([]);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Task 1: Write async fetch operation
@@ -29,9 +29,9 @@ const MainPage = () => {
   }, []);
 
   // Task 2: Navigate to details page
-  // const goToDetailsPage = (productId) => {
-  //   navigate(`/app/product/${productId}`);
-  // };
+  const goToDetailsPage = (productId) => {
+    navigate(`/app/product/${productId}`);
+  };
 
   // Task 3: Format timestamp
   const formatDate = (timestamp) => {
@@ -81,7 +81,7 @@ const MainPage = () => {
                   <p className="card-text">{formatDate(gift.date_added)}</p>
 
                   <button
-                    // onClick={() => goToDetailsPage(gift.id)}
+                    onClick={() => goToDetailsPage(gift.id)}
                     className="btn btn-primary"
                   >
                     View Details
