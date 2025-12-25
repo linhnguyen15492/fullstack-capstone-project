@@ -19,10 +19,10 @@ router.get("/", async (req, res) => {
     const gifts = await collection.find({}).toArray();
 
     // Task 4: return the gifts using the res.json method
-    res.status(200).json(gifts);
+    return res.status(200).json(gifts);
   } catch (e) {
     logger.console.error("Error fetching gifts:", e);
-    res.status(500).send("Error fetching gifts");
+    return res.status(500).send("Error fetching gifts");
   }
 });
 
@@ -43,10 +43,10 @@ router.get("/:id", async (req, res) => {
       return res.status(404).send("Gift not found");
     }
 
-    res.status(200).json(gift);
+    return res.status(200).json(gift);
   } catch (e) {
     console.error("Error fetching gift:", e);
-    res.status(500).send("Error fetching gift");
+    return res.status(500).send("Error fetching gift");
   }
 });
 
@@ -57,7 +57,7 @@ router.post("/", async (req, res, next) => {
     const collection = db.collection(collection_name);
     const gift = await collection.insertOne(req.body);
 
-    res.status(201).json(gift.ops[0]);
+    return res.status(201).json(gift.ops[0]);
   } catch (e) {
     next(e);
   }
