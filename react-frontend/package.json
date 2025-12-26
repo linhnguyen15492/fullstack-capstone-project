@@ -5,8 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "postbuild": "cp -r dist ../giftwebsite",
+    "build": "vite build && shx cp -r dist/* ../giftwebsite",
     "lint": "eslint .",
     "preview": "vite preview"
   },
