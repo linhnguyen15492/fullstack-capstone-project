@@ -1,5 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./RegisterPage.css";
+import { urlConfig } from "../../config"
+import { useAppContext } from "../../context/AuthContext"
 
 const RegisterPage = () => {
   //insert code here to create useState hook variables for firstName, lastName, email, password
@@ -8,10 +11,59 @@ const RegisterPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // Include a state for error message.
+  const [showerr, setShowerr] = useState('');
+
+  const navigate = useNavigate();
+  const { setIsLoggedIn } = useAppContext();
+
   // insert code here to create handleRegister function and include console.log
   const handleRegister = async () => {
     console.log("Register invoked");
-  };
+
+    try {
+      const response = await fetch(`${urlConfig.backendUrl}/api/auth/register`, {
+        //Task 6: Set method
+        method: 'POST',
+
+        //Task 7: Set headers
+        headers: {
+          'content-type': 'application/json',
+        },
+
+        //Task 8: Set body to send user details
+        body: JSON.stringify({
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          password: password
+        })
+      })
+
+      const json = await response.json();
+      console.log('json data', json);
+      console.log('er', json.error);
+
+      if (json.authtoken) {
+        sessionStorage.setItem('auth-token', json.authtoken);
+        sessionStorage.setItem('name', firstName);
+        sessionStorage.setItem('email', json.email);
+
+        //insert code for setting logged in state
+        setIsLoggedIn(true);
+
+        //insert code for navigating to MainPAge
+        navigate('/app')
+      }
+
+      if (json.error) {
+        setShowerr(json.error);
+      }
+
+    } catch (e) {
+      console.log("Error fetching details: " + e.message);
+    }
+  }
 
   return (
     <div className="container mt-5">
@@ -60,6 +112,7 @@ const RegisterPage = () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
+
             <div className="mb-4">
               <label htmlFor="password" className="form-label">Password</label>
               <input
@@ -79,6 +132,8 @@ const RegisterPage = () => {
             >
               Register
             </button>
+
+            <div className="text-danger">{showerr}</div>
 
             <p className="mt-4 text-center">
               Already a member?{" "}
