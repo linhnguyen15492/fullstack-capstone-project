@@ -49,5 +49,5 @@ jobs:
         run: |
           cd react-frontend
           npm install
-          npm run build
+          npm run deploy
           echo "Client-side build successfully"
