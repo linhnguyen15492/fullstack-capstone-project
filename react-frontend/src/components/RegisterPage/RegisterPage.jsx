@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./RegisterPage.css";
 import { urlConfig } from "../../config"
-import { useAppContext } from "../../context/AuthContext"
+import { useAuthContext } from "../../context/AuthContext"
 
 const RegisterPage = () => {
   //insert code here to create useState hook variables for firstName, lastName, email, password
@@ -15,7 +15,7 @@ const RegisterPage = () => {
   const [showerr, setShowerr] = useState('');
 
   const navigate = useNavigate();
-  const { setIsLoggedIn } = useAppContext();
+  const { setIsLoggedIn } = useAuthContext();
 
   // insert code here to create handleRegister function and include console.log
   const handleRegister = async () => {

@@ -88,7 +88,6 @@ const DetailsPage = () => {
         <div className="card-body">
           <div className="image-placeholder-large">
             {gift.image ? (
-              // Task 5: Display gift image
               <img
                 src={gift.image}
                 alt={gift.name}

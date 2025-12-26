@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { urlConfig } from '../../config';
-import { useAppContext } from '../../context/AuthContext';
+// import { useAuthContext } from '../../context/AuthContext';
+import { useAuthContext } from '../../context/AuthContext';
 
 const Navbar = () => {
-  const { isLoggedIn, setIsLoggedIn, userName, setUserName } = useAppContext();
+  const { isLoggedIn, setIsLoggedIn, userName, setUserName } = useAuthContext();
 
   const navigate = useNavigate();
 
