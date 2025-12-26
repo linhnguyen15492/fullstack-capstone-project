@@ -36,6 +36,42 @@ const RegisterPage = () => {
               />
             </div>
 
+            <div className="mb-3">
+              <label htmlFor="lastName" className="form-label">LastName</label>
+              <input
+                id="lastName"
+                type="text"
+                className="form-control"
+                placeholder="Enter your lastName"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+              />
+            </div>
+
+            {/* email  */}
+            <div className="mb-3">
+              <label htmlFor="email" className="form-label">Email</label>
+              <input
+                id="email"
+                type="text"
+                className="form-control"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="password" className="form-label">Password</label>
+              <input
+                id="password"
+                type="password"
+                className="form-control"
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+
             {/* insert code here to create a button that performs the `handleRegister` function on click */}
             <button
               className="btn btn-primary w-100 mb-3"
