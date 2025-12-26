@@ -72,6 +72,7 @@ router.post("/login", async (req, res) => {
 
     // Task 3: Check for user credentials in database
     const existingUser = await collection.findOne({ email: req.body.email });
+    console.log(existingUser);
 
     // Task 4: Task 4: Check if the password matches the encrypyted password and send appropriate message on mismatch
     if (existingUser) {
@@ -81,12 +82,13 @@ router.post("/login", async (req, res) => {
       );
 
       if (!passwordMatch) {
+        logger.error("Invalid credentials");
         return res.status(401).send("Invalid credentials");
       }
 
       // Task 5: Fetch user details from database
-      const userName = user.firstName;
-      const userEmail = user.email;
+      const userName = existingUser.firstName;
+      const userEmail = existingUser.email;
 
       // Task 6: Create JWT authentication if passwords match with user._id as payload
       let payload = {
