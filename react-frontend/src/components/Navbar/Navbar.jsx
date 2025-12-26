@@ -28,11 +28,11 @@ const Navbar = () => {
     sessionStorage.removeItem('name');
     sessionStorage.removeItem('email');
     setIsLoggedIn(false);
-    navigate(`/app`);
+    navigate('/app');
   }
 
   const profileSecton = () => {
-    navigate(`/app/profile`);
+    navigate('/app/profile');
   }
 
   return (
@@ -62,14 +62,12 @@ const Navbar = () => {
               <Link className="nav-link" to="/app/search">Search</Link>
             </li>
 
-            <li className="nav-item">
-              <Link className="nav-link" to="/app/search">Search</Link>
-            </li>
-
             <ul className="navbar-nav ml-auto">
               {isLoggedIn ? (
                 <>
-                  <li className="nav-item"> <span className="nav-link" style={{ color: "black", cursor: "pointer" }} onClick={profileSecton}>Welcome, {userName}</span> </li>
+                  <li className="nav-item">
+                    <span className="nav-link" style={{ color: "black", cursor: "pointer" }} onClick={profileSecton}>Welcome, {userName}</span>
+                  </li>
                   <li className="nav-item"><button className="nav-link login-btn" onClick={handleLogout}>Logout</button></li>
                 </>
               ) : (
