@@ -49,5 +49,6 @@ jobs:
         run: |
           cd react-frontend
           npm install
-          npm run deploy
+          npm run build
+          cp dist ../giftwebsite
           echo "Client-side build successfully"
