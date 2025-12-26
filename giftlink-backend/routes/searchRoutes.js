@@ -1,44 +1,44 @@
 /*jshint esversion: 8 */
-const express = require('express')
-const router = express.Router()
-const connectToDatabase = require('../models/db')
+const express = require("express");
+const router = express.Router();
+const connectToDatabase = require("../models/db");
 
-const collection_name = 'gifts'
+const collection_name = "gifts";
 
 // Search for gifts
-router.get('/', async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     // Connect to MongoDB using connectToDatabase database. Remember to use the await keyword and store the connection in `db`
-    const db = await connectToDatabase()
+    const db = await connectToDatabase();
 
-    const collection = db.collection(collection_name)
+    const collection = db.collection(collection_name);
 
     // Initialize the query object
-    let query = {}
+    let query = {};
 
     // Add the name filter to the query if the name parameter is not empty
-    if (req.query.name && req.query.name.trim() !== '') {
-      query.name = { $regex: req.query.name, $options: 'i' } // Using regex for partial match, case-insensitive
+    if (req.query.name && req.query.name.trim() !== "") {
+      query.name = { $regex: req.query.name, $options: "i" }; // Using regex for partial match, case-insensitive
     }
 
     // Add other filters to the query
     if (req.query.category) {
-      query.category = req.query.category
+      query.category = req.query.category;
     }
     if (req.query.condition) {
-      query.condition = req.query.condition
+      query.condition = req.query.condition;
     }
     if (req.query.age_years) {
-      query.age_years = { $lte: parseInt(req.query.age_years) }
+      query.age_years = { $lte: parseInt(req.query.age_years) };
     }
 
     // Fetch filtered gifts using the find(query) method. Make sure to use await and store the result in the `gifts` constant
-    let gifts = await collection.find(query).toArray()
+    let gifts = await collection.find(query).toArray();
 
-    return res.status(200).json(gifts)
+    return res.status(200).json(gifts);
   } catch (e) {
-    next(e)
+    next(e);
   }
-})
+});
 
-module.exports = router
+module.exports = router;
